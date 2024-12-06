@@ -26,4 +26,18 @@ router.get("/gems", async (req, res) => {
 	}
 });
 
+// GET one GemRec by ID
+router.get("/:id", async (req, res) => {
+	try {
+		const gemRec = await GemRec.findById(req.params.id);
+		if (!gemRec) {
+			return res.status(404).json({ message: "GemRec not found" });
+		}
+		res.json(gemRec);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: "Server error" });
+	}
+});
+
 module.exports = router;
