@@ -27,16 +27,20 @@ router.get("/gems", async (req, res) => {
 });
 
 // GET one GemRec by ID
-router.get("/:id", async (req, res) => {
+router.get("/:grid", async (req, res) => {
+	const grid = req.params.grid;
+	console.log("Fetching GemRec with grid:", grid);
+
 	try {
-		const gemRec = await GemRec.findById(req.params.id);
+		const gemRec = await GemRec.findOne({ grid });
 		if (!gemRec) {
+			console.log("GemRec not found for grid:", grid);
 			return res.status(404).json({ message: "GemRec not found" });
 		}
 		res.json(gemRec);
 	} catch (error) {
-		console.error(error);
-		res.status(500).json({ message: "Server error" });
+		console.error("Error fetching GemRec:", error);
+		res.status(500).json({ message: "Internal Server Error" });
 	}
 });
 

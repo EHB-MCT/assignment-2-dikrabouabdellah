@@ -23,20 +23,14 @@ function renderGemRecs(gemRecs) {
 	}
 
 	gemRecs.forEach((gemRec) => {
-		const card = document.createElement("div");
-		card.className = "gemrec-card";
+		const button = document.createElement("button");
+		button.className = "gemrec-card";
+		button.innerText = gemRec.name;
+		button.addEventListener("click", () => {
+			window.location.href = `gemrec.html?grid=${gemRec.grid}`;
+		});
 
-		card.innerHTML = `
-            <img src="${gemRec.image}" alt="${gemRec.name}">
-            <h2>${gemRec.name}</h2>
-            <p><strong>Genre:</strong> ${gemRec.genre}</p>
-            <p><strong>Aired:</strong> ${gemRec.aired}</p>
-            <p><strong>Episodes:</strong> ${gemRec.episode}</p>
-            <p>${gemRec.summary}</p>
-            <a href="${gemRec.watch}" target="_blank" rel="noopener noreferrer">Watch Now</a>
-        `;
-
-		gemRecList.appendChild(card);
+		gemRecList.appendChild(button);
 	});
 }
 
