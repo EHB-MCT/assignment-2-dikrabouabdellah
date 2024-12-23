@@ -32,5 +32,22 @@
 ## 7. Next Steps
 
 - Work on improving the frontend to display the fetched anime recommendations.
-- Add functionality to filter recommendations based on user preferences.
+
+# Progress on GemRec Project 23/12/2024
+
+## 1. Modified the frontend and backend
+
+- Implemented functionality where clicking on a `gemrec` card takes the user to a detailed page showing additional information (e.g., genre, aired date, summary, etc.).
+
+## 2. grid id
+
+- Used MongoDB Atlas to store `gemrec` data, with the `grid` field as the id.
+
+## 3. Branching and Git Workflow
+
+- Worked with multiple Git branches (`dev`, `docs`, `feature/one-gemrec`).
+
+## 4. Next Steps
+
 - Start collecting data
+- Store the data
