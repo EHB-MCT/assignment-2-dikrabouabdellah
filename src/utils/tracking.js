@@ -1,16 +1,16 @@
 const TRACKING_API_URL = "http://localhost:5000/api/interactions";
 
 // Function to send interaction data to the backend
-export async function trackInteraction(eventType, { page, timestamp, scrollDepth }) {
+export async function trackInteraction(eventType, { page, timestamp, scrollDepth, buttonName }) {
 	try {
-		console.log("Sending interaction data:", eventType, { page, timestamp, scrollDepth });
+		console.log("Sending interaction data:", eventType, { page, timestamp, scrollDepth, buttonName });
 
 		const response = await fetch("http://localhost:5000/api/track", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ eventType, timestamp, page, scrollDepth }), // Correctly stringify the data
+			body: JSON.stringify({ eventType, timestamp, page, scrollDepth, buttonName }),
 		});
 
 		if (!response.ok) {
@@ -18,7 +18,7 @@ export async function trackInteraction(eventType, { page, timestamp, scrollDepth
 		}
 
 		// Log the successful interaction
-		console.log(`Interaction logged: ${eventType}`, { page, timestamp, scrollDepth });
+		console.log(`Interaction logged: ${eventType}`, { page, timestamp, scrollDepth, buttonName });
 	} catch (error) {
 		console.error("Error logging interaction:", error);
 	}

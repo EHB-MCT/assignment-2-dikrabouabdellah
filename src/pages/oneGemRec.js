@@ -1,9 +1,10 @@
+import { trackInteraction } from "./../utils/tracking.js";
 const API_URL = "http://localhost:5000/api/gemrecs";
 
 // Get the `grid` value from the URL query parameters
 function getGemRecGrid() {
 	const urlParams = new URLSearchParams(window.location.search);
-	return urlParams.get("grid");
+	return urlParams.get("grid"); // This should fetch the grid value from the URL
 }
 
 // Fetch the GemRec details from the backend
@@ -36,6 +37,17 @@ function renderGemRecDetails(gemRec) {
         <p>${gemRec.summary}</p>
         <a href="${gemRec.watch}" target="_blank" rel="noopener noreferrer">Watch Now</a>
     `;
+
+	// Log the grid value and page name for debugging
+	console.log("GemRec grid:", gemRec.grid);
+	console.log("Page tracking for:", `gemrec-${gemRec.grid}`);
+
+	// Track the gemrec page load interaction
+	trackInteraction("page-load", {
+		page: `gemrec-${gemRec.grid}`, // Track using the specific grid ID
+		timestamp: new Date().toISOString(),
+		grid: gemRec.grid, // Include the grid ID in the tracking data
+	});
 }
 
 // Initialize the app

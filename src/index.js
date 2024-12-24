@@ -3,8 +3,8 @@ const API_URL = "http://localhost:5000/api/gemrecs";
 
 // Track when the page has fully loaded
 window.onload = async () => {
-	await trackInteraction("page-load", {
-		page: "homepage",
+	await trackInteraction("page-view", {
+		page: window.location.pathname,
 		timestamp: new Date().toISOString(),
 	});
 };
@@ -14,7 +14,7 @@ let lastScrollDepth = 0;
 
 window.addEventListener("scroll", async () => {
 	const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-	const scrollDepth = Math.floor((window.scrollY / totalHeight) * 100); // Percentage of scroll depth
+	const scrollDepth = Math.floor((window.scrollY / totalHeight) * 100);
 
 	// Only send data when the user scrolls past certain thresholds (e.g., 25%, 50%, 75%, 100%)
 	if (scrollDepth !== lastScrollDepth && (scrollDepth === 25 || scrollDepth === 50 || scrollDepth === 75 || scrollDepth === 100)) {
@@ -53,17 +53,28 @@ function renderGemRecs(gemRecs) {
 		const button = document.createElement("button");
 		button.className = "gemrec-card";
 
-		// Add event listener to track interaction and navigate
+		// event listener to track interaction and navigate
 		button.addEventListener("click", () => {
 			// Log interaction
 			trackInteraction("click", {
 				grid: gemRec.grid,
 				page: "/index.html",
 				timestamp: new Date().toISOString(),
+				buttonName: gemRec.name,
 			});
 
 			// Redirect to the details page
 			window.location.href = `gemrec.html?grid=${gemRec.grid}`;
+		});
+
+		// event listener to track hovering
+		button.addEventListener("mouseenter", () => {
+			// Track hover interaction
+			trackInteraction("hover", {
+				page: "homepage",
+				timestamp: new Date().toISOString(),
+				buttonName: gemRec.name,
+			});
 		});
 
 		// Add the image inside the button
@@ -77,11 +88,8 @@ function renderGemRecs(gemRecs) {
 		title.className = "gemrec-title";
 		title.innerText = gemRec.name;
 
-		// Append the image and title to the button
 		button.appendChild(img);
 		button.appendChild(title);
-
-		// Append the button to the list
 		gemRecList.appendChild(button);
 	});
 }
