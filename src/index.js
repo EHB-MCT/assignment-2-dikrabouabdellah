@@ -1,4 +1,31 @@
+import { trackInteraction } from "./../src/utils/tracking.js";
 const API_URL = "http://localhost:5000/api/gemrecs";
+
+// Track when the page has fully loaded
+window.onload = async () => {
+	await trackInteraction("page-load", {
+		page: "homepage",
+		timestamp: new Date().toISOString(),
+	});
+};
+
+// Track scroll depth and send data to the backend
+let lastScrollDepth = 0;
+
+window.addEventListener("scroll", async () => {
+	const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+	const scrollDepth = Math.floor((window.scrollY / totalHeight) * 100); // Percentage of scroll depth
+
+	// Only send data when the user scrolls past certain thresholds (e.g., 25%, 50%, 75%, 100%)
+	if (scrollDepth !== lastScrollDepth && (scrollDepth === 25 || scrollDepth === 50 || scrollDepth === 75 || scrollDepth === 100)) {
+		await trackInteraction("scroll-depth", {
+			scrollDepth,
+			page: "homepage",
+			timestamp: new Date().toISOString(),
+		});
+		lastScrollDepth = scrollDepth;
+	}
+});
 
 // Fetch GemRecs from the backend
 async function fetchGemRecs() {
@@ -25,7 +52,18 @@ function renderGemRecs(gemRecs) {
 	gemRecs.forEach((gemRec) => {
 		const button = document.createElement("button");
 		button.className = "gemrec-card";
+
+		// Add event listener to track interaction and navigate
 		button.addEventListener("click", () => {
+			// Log interaction
+			trackInteraction({
+				grid: gemRec.grid,
+				interactionType: "click",
+				page: "/index.html",
+				timestamp: new Date().toISOString(),
+			});
+
+			// Redirect to the details page
 			window.location.href = `gemrec.html?grid=${gemRec.grid}`;
 		});
 
