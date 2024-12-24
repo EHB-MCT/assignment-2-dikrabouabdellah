@@ -25,10 +25,27 @@ function renderGemRecs(gemRecs) {
 	gemRecs.forEach((gemRec) => {
 		const button = document.createElement("button");
 		button.className = "gemrec-card";
-		button.innerText = gemRec.name;
 		button.addEventListener("click", () => {
 			window.location.href = `gemrec.html?grid=${gemRec.grid}`;
 		});
+
+		// Add the image inside the button
+		const img = document.createElement("img");
+		img.src = gemRec.image;
+		img.alt = gemRec.name;
+		img.className = "gemrec-image";
+
+		// Add the title inside the button
+		const title = document.createElement("span");
+		title.className = "gemrec-title";
+		title.innerText = gemRec.name;
+
+		// Append the image and title to the button
+		button.appendChild(img);
+		button.appendChild(title);
+
+		// Append the button to the list
+		gemRecList.appendChild(button);
 
 		gemRecList.appendChild(button);
 	});

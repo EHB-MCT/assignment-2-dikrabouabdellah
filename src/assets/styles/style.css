@@ -26,12 +26,35 @@ header {
 	overflow: hidden;
 	text-align: center;
 	padding: 1rem;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transition: transform 0.2s, background-color 0.2s;
+	border: none;
+}
+
+.gemrec-card:hover {
+	transform: scale(1.05);
+	background-color: #f9f9f9;
 }
 
 .gemrec-card img {
 	width: 100%;
-	height: auto;
-	border-bottom: 1px solid #ddd;
+	object-fit: cover;
+	margin-bottom: 0.5rem;
+}
+
+.gemrec-card span {
+	font-size: 1rem;
+	font-weight: bold;
+	color: #333;
+	text-align: center;
+	margin-top: 0.5rem;
+}
+
+.gemrec-card:focus {
+	outline: 2px solid #ff6f61;
 }
 
 .gemrec-card h2 {
