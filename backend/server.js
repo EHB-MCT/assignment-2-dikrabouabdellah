@@ -3,12 +3,15 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 const gemRecRoutes = require("./routes/gemRecRoutes.js");
+const bodyParser = require("body-parser");
+const trackingRoutes = require("./routes/trackingRoutes.js");
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 // Connect to MongoDB
 mongoose
@@ -18,6 +21,9 @@ mongoose
 
 // GemRec routes
 app.use("/api/gemrecs", gemRecRoutes);
+
+// Tracking routes
+app.use("/api", trackingRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;

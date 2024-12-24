@@ -56,9 +56,8 @@ function renderGemRecs(gemRecs) {
 		// Add event listener to track interaction and navigate
 		button.addEventListener("click", () => {
 			// Log interaction
-			trackInteraction({
+			trackInteraction("click", {
 				grid: gemRec.grid,
-				interactionType: "click",
 				page: "/index.html",
 				timestamp: new Date().toISOString(),
 			});
@@ -83,8 +82,6 @@ function renderGemRecs(gemRecs) {
 		button.appendChild(title);
 
 		// Append the button to the list
-		gemRecList.appendChild(button);
-
 		gemRecList.appendChild(button);
 	});
 }
