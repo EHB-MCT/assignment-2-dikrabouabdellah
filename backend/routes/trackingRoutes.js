@@ -26,24 +26,10 @@ router.post("/track", async (req, res) => {
 	}
 });
 
-// route to get the aggregated data for page views
+// Route to get the aggregated data for page views
 router.get("/aggregate/page-views", async (req, res) => {
 	try {
-		// Aggregating page views by page
-		const pageViews = await Tracking.aggregate([
-			{
-				$match: { eventType: "page-load" },
-			},
-			{
-				$group: {
-					_id: "$page", // Group by page
-					count: { $sum: 1 }, // Count occurrences
-				},
-			},
-			{
-				$sort: { count: -1 }, // Sort by highest count
-			},
-		]);
+		const pageViews = await Tracking.aggregate([{ $match: { eventType: "page-load" } }, { $group: { _id: "$page", count: { $sum: 1 } } }, { $sort: { count: -1 } }]);
 
 		res.status(200).json(pageViews);
 	} catch (error) {
@@ -52,26 +38,40 @@ router.get("/aggregate/page-views", async (req, res) => {
 	}
 });
 
-// route to get aggregated button clicks
+// Route to get aggregated button clicks
 router.get("/aggregate/button-clicks", async (req, res) => {
 	try {
-		// Aggregating button clicks by button name
-		const buttonClicks = await Tracking.aggregate([
-			{
-				$match: { eventType: "click" },
-			},
-			{
-				$group: {
-					_id: "$buttonName",
-					count: { $sum: 1 },
-				},
-			},
-			{
-				$sort: { count: -1 },
-			},
-		]);
+		const buttonClicks = await Tracking.aggregate([{ $match: { eventType: "click" } }, { $group: { _id: "$buttonName", count: { $sum: 1 } } }, { $sort: { count: -1 } }]);
 
 		res.status(200).json(buttonClicks);
+	} catch (error) {
+		console.error("Error aggregating data:", error);
+		res.status(500).send("Error aggregating data");
+	}
+});
+
+// Route to get aggregated scroll depth
+router.get("/aggregate/scroll-depth", async (req, res) => {
+	try {
+		const scrollDepths = await Tracking.aggregate([
+			{ $match: { eventType: "scroll-depth" } },
+			{ $group: { _id: "$scrollDepth", count: { $sum: 1 } } },
+			{ $sort: { _id: 1 } }, // Sort by scroll depth percentage
+		]);
+
+		res.status(200).json(scrollDepths);
+	} catch (error) {
+		console.error("Error aggregating data:", error);
+		res.status(500).send("Error aggregating data");
+	}
+});
+
+// Route to get overall event counts by event type
+router.get("/aggregate/event-types", async (req, res) => {
+	try {
+		const eventCounts = await Tracking.aggregate([{ $group: { _id: "$eventType", count: { $sum: 1 } } }, { $sort: { count: -1 } }]);
+
+		res.status(200).json(eventCounts);
 	} catch (error) {
 		console.error("Error aggregating data:", error);
 		res.status(500).send("Error aggregating data");
