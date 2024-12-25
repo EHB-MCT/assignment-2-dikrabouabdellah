@@ -51,3 +51,42 @@
 
 - Start collecting data
 - Store the data
+
+# Progress on GemRec Project 25/12/2024
+
+## 1. Database Schema Updates
+
+- Added a `Tracking` model to store event types, timestamps, page views, scroll depths, and button clicks.
+
+## 2. Backend Tracking Routes
+
+- Implemented `/api/track` endpoint to log interaction events into the database.
+- Added backend aggregation logic to count page views and button clicks.
+
+## 3. Frontend Tracking
+
+     - Logged events for when the homepage and detail page load.
+     - Implemented scroll depth tracking on the homepage for thresholds (25%, 50%, 75%, 100%).
+     - Logged button clicks on homepage GemRec cards.
+     - Ensured `buttonName` was passed correctly and tracked in the backend.
+     - Tracked user navigation to detail pages and included the specific `grid` of the GemRec being viewed.
+
+## 4. Testing
+
+- Tested backend endpoints using Postman to ensure data was saved correctly in the database.
+- Verified frontend tracking via console logs and MongoDB data inspection.
+
+## 5. Bug Fixes
+
+- Resolved issues with tracking code, such as `buttonName` undefined error.
+- Addressed the issue where detail page views were incorrectly logged as `/public/`.
+
+## 6. GemRec cards
+
+- Added the images back to the homepage
+
+## Next Steps
+
+- Add more tracking features if needed.
+- Implement data visualization for aggregated data in the frontend.
+- Add more styling
