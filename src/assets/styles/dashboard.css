@@ -16,3 +16,27 @@ section {
 main {
 	text-align: center;
 }
+
+#refresh-btn {
+	color: white;
+	background-color: #ff6f61;
+	padding: 1rem;
+	border-radius: 5px;
+	border-color: #ff6f61;
+	border: none;
+	margin: 1rem;
+	margin-left: 47%;
+	cursor: pointer;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-right: 39%;
+	padding-left: 5%;
+}
+
+header img {
+	width: 50px;
+}

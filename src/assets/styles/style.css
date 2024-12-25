@@ -79,3 +79,11 @@ header {
 .gemrec-card a:hover {
 	background-color: #ff4f41;
 }
+
+#Analytics {
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 2%;
+	text-decoration: none;
+	color: black;
+}
