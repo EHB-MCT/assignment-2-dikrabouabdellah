@@ -52,7 +52,7 @@
 - Start collecting data
 - Store the data
 
-# Progress on GemRec Project 25/12/2024
+# Progress on GemRec Project 24/12/2024
 
 ## 1. Database Schema Updates
 
@@ -90,3 +90,34 @@
 - Add more tracking features if needed.
 - Implement data visualization for aggregated data in the frontend.
 - Add more styling
+
+# Progress on GemRec Project 25/12/2024
+
+## 1. Tracking Routes
+
+     - `/aggregate/scroll-depth`: Aggregates scroll depth data.
+     - `/aggregate/event-types`: Aggregates event types such as clicks, scrolls, etc.
+
+## 2. Frontend Dashboard
+
+     - Created a dashboard to visualise the data
+     - Integrated Chart.js to visualize the data in bar and pie charts.
+     - Each section has a chart displaying aggregated data, including page views, button clicks, scroll depth, and event types.
+
+## 3. Refresh Functionality
+
+- Added a Refresh button to fetch new interaction data and update the charts.
+
+## 4. Real-time Data Update:
+
+- The dashboard fetches real-time data from the backend every time it loads, ensuring the charts display up-to-date information.
+
+## 5. Styling:
+
+- Created a clean layout using CSS to make the dashboard visually appealing.
+
+## Next Steps
+
+- Aggregate aditional data
+- Add diferent graphics
+- Update documentation
