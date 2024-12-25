@@ -48,8 +48,8 @@ function createPieChart(ctx, labels, data, title) {
 				{
 					label: title,
 					data,
-					backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)"],
-					borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)"],
+					backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(137, 75, 192, 0.2)"],
+					borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgb(118, 75, 192)"],
 					borderWidth: 1,
 				},
 			],
@@ -59,6 +59,19 @@ function createPieChart(ctx, labels, data, title) {
 				legend: {
 					display: true,
 					position: "top",
+					labels: {
+						font: {
+							size: 14, // Adjust the font size if needed
+						},
+					},
+				},
+			},
+			layout: {
+				padding: {
+					left: 30,
+					right: 30,
+					top: 30,
+					bottom: 30, // Add padding around the chart to give space around the pie chart
 				},
 			},
 		},
@@ -92,4 +105,10 @@ async function initDashboard() {
 	createPieChart(document.getElementById("eventTypesChart"), eventLabels, eventCounts, "Event Types");
 }
 
+// Set up the refresh button to reload the page
+document.getElementById("refresh-btn").addEventListener("click", function () {
+	window.location.reload(); // Reload the page
+});
+
+// Initialize the dashboard when the page is loaded
 initDashboard();
