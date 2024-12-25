@@ -1,5 +1,8 @@
 const API_BASE_URL = "http://localhost:5000/api/aggregate";
 
+// Store references to charts to clear them later
+let pageViewsChart, buttonClicksChart, scrollDepthChart, eventTypesChart;
+
 // Fetch data from a given endpoint
 async function fetchData(endpoint) {
 	try {
@@ -80,34 +83,46 @@ function createPieChart(ctx, labels, data, title) {
 
 // Initialize the dashboard
 async function initDashboard() {
-	// Page Views
+	// Fetch Page Views data
 	const pageViewsData = await fetchData("page-views");
 	const pageLabels = pageViewsData.map((item) => item._id);
 	const pageCounts = pageViewsData.map((item) => item.count);
-	createBarChart(document.getElementById("pageViewsChart"), pageLabels, pageCounts, "Page Views");
 
-	// Button Clicks
+	// If the chart already exists, destroy it before creating a new one
+	if (pageViewsChart) pageViewsChart.destroy();
+	pageViewsChart = createBarChart(document.getElementById("pageViewsChart"), pageLabels, pageCounts, "Page Views");
+
+	// Fetch Button Clicks data
 	const buttonClicksData = await fetchData("button-clicks");
 	const buttonLabels = buttonClicksData.map((item) => item._id);
 	const buttonCounts = buttonClicksData.map((item) => item.count);
-	createBarChart(document.getElementById("buttonClicksChart"), buttonLabels, buttonCounts, "Button Clicks");
 
-	// Scroll Depth
+	// If the chart already exists, destroy it before creating a new one
+	if (buttonClicksChart) buttonClicksChart.destroy();
+	buttonClicksChart = createBarChart(document.getElementById("buttonClicksChart"), buttonLabels, buttonCounts, "Button Clicks");
+
+	// Fetch Scroll Depth data
 	const scrollDepthData = await fetchData("scroll-depth");
 	const scrollLabels = scrollDepthData.map((item) => `${item._id}%`);
 	const scrollCounts = scrollDepthData.map((item) => item.count);
-	createPieChart(document.getElementById("scrollDepthChart"), scrollLabels, scrollCounts, "Scroll Depth");
 
-	// Event Types
+	// If the chart already exists, destroy it before creating a new one
+	if (scrollDepthChart) scrollDepthChart.destroy();
+	scrollDepthChart = createPieChart(document.getElementById("scrollDepthChart"), scrollLabels, scrollCounts, "Scroll Depth");
+
+	// Fetch Event Types data
 	const eventTypesData = await fetchData("event-types");
 	const eventLabels = eventTypesData.map((item) => item._id);
 	const eventCounts = eventTypesData.map((item) => item.count);
-	createPieChart(document.getElementById("eventTypesChart"), eventLabels, eventCounts, "Event Types");
+
+	// If the chart already exists, destroy it before creating a new one
+	if (eventTypesChart) eventTypesChart.destroy();
+	eventTypesChart = createPieChart(document.getElementById("eventTypesChart"), eventLabels, eventCounts, "Event Types");
 }
 
-// Set up the refresh button to reload the page
+// Set up the refresh button to reload the data (without reloading the page)
 document.getElementById("refresh-btn").addEventListener("click", function () {
-	window.location.reload(); // Reload the page
+	initDashboard(); // Re-initialize and fetch new data for the charts
 });
 
 // Initialize the dashboard when the page is loaded

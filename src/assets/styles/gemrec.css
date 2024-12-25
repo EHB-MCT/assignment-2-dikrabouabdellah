@@ -1,0 +1,64 @@
+* {
+	margin: 0;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	color: #333;
+	line-height: 1.6;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-right: 41%;
+	padding-left: 5%;
+}
+
+header img {
+	width: 50px;
+}
+
+h1 {
+	padding: 0.9rem;
+}
+
+h2,
+h3 {
+	font-family: "Arial", sans-serif;
+	font-weight: 600;
+}
+
+#gemrec-details img {
+	width: 22%;
+	object-fit: contain;
+}
+
+#gemrec-details {
+	display: flex;
+	padding: 3rem;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 5%;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#gemrec-text {
+	padding-left: 2rem;
+}
+
+#gemrec-text a {
+	text-decoration: none;
+	color: white;
+	background-color: #ff6f61;
+	padding: 1rem;
+	border-radius: 5px;
+}
+
+#button {
+	margin-top: 3rem;
+}

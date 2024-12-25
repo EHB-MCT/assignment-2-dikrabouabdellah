@@ -30,12 +30,16 @@ function renderGemRecDetails(gemRec) {
 
 	detailsContainer.innerHTML = `
         <img src="${gemRec.image}" alt="${gemRec.name}" class="gemrec-image">
+		<div id="gemrec-text">
         <h2 class="gemrec-title">${gemRec.name}</h2>
         <p><strong>Genre:</strong> ${gemRec.genre}</p>
         <p><strong>Aired:</strong> ${gemRec.aired}</p>
         <p><strong>Episodes:</strong> ${gemRec.episode}</p>
         <p>${gemRec.summary}</p>
+		<div id="button">
         <a href="${gemRec.watch}" target="_blank" rel="noopener noreferrer">Watch Now</a>
+		</div>
+		</div>
     `;
 
 	// Log the grid value and page name for debugging
