@@ -66,17 +66,20 @@ function createPieChart(ctx, labels, data, title) {
 						font: {
 							size: 14, // Adjust the font size if needed
 						},
+						padding: 20,
 					},
 				},
 			},
 			layout: {
 				padding: {
-					left: 30,
-					right: 30,
-					top: 30,
-					bottom: 30, // Add padding around the chart to give space around the pie chart
+					top: 20,
+					bottom: 50,
+					left: 50,
+					right: 50,
 				},
 			},
+			responsive: true,
+			maintainAspectRatio: false,
 		},
 	});
 }
