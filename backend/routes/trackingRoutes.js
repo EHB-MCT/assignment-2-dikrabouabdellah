@@ -24,18 +24,6 @@ router.post("/track", async (req, res) => {
 	}
 });
 
-// Route to get the aggregated data for page views
-router.get("/aggregate/page-views", async (req, res) => {
-	try {
-		const pageViews = await Tracking.aggregate([{ $match: { eventType: "page-load" } }, { $group: { _id: "$page", count: { $sum: 1 } } }, { $sort: { count: -1 } }]);
-
-		res.status(200).json(pageViews);
-	} catch (error) {
-		console.error("Error aggregating data:", error);
-		res.status(500).send("Error aggregating data");
-	}
-});
-
 // Route to get aggregated button clicks
 router.get("/aggregate/button-clicks", async (req, res) => {
 	try {

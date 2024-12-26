@@ -121,3 +121,23 @@
 - Aggregate aditional data
 - Add diferent graphics
 - Update documentation
+
+# Progress on GemRec Project 26/12/2024
+
+## 1. Removed Unnecessary Graphs
+
+- Removed the Page Views\*\* and Event Types graphs from the dashboard as they were not relevant to the current project needs.
+- Cleaned up the associated code in both the HTML\*\* and JavaScript files related to these graphs.
+
+## 2. Added a New graph
+
+- Added a new graph for amount of hovering over a GemRec
+- Also added the nessecary endpoints for aggregating this data
+
+## 3. Styling
+
+- Styled the graphs differently to be more visualing appealing
+
+## 4. Documentation
+
+- Updated the' documentation.md and wrote a setup.md
