@@ -1,7 +1,7 @@
 const API_BASE_URL = "http://localhost:5000/api/aggregate";
 
 // Store references to charts to clear them later
-let pageViewsChart, buttonClicksChart, scrollDepthChart, eventTypesChart;
+let buttonClicksChart, scrollDepthChart, buttonHoversChart;
 
 // Fetch data from a given endpoint
 async function fetchData(endpoint) {
@@ -83,15 +83,6 @@ function createPieChart(ctx, labels, data, title) {
 
 // Initialize the dashboard
 async function initDashboard() {
-	// Fetch Page Views data
-	const pageViewsData = await fetchData("page-views");
-	const pageLabels = pageViewsData.map((item) => item._id);
-	const pageCounts = pageViewsData.map((item) => item.count);
-
-	// If the chart already exists, destroy it before creating a new one
-	if (pageViewsChart) pageViewsChart.destroy();
-	pageViewsChart = createBarChart(document.getElementById("pageViewsChart"), pageLabels, pageCounts, "Page Views");
-
 	// Fetch Button Clicks data
 	const buttonClicksData = await fetchData("button-clicks");
 	const buttonLabels = buttonClicksData.map((item) => item._id);
@@ -111,13 +102,13 @@ async function initDashboard() {
 	scrollDepthChart = createPieChart(document.getElementById("scrollDepthChart"), scrollLabels, scrollCounts, "Scroll Depth");
 
 	// Fetch Event Types data
-	const eventTypesData = await fetchData("event-types");
-	const eventLabels = eventTypesData.map((item) => item._id);
-	const eventCounts = eventTypesData.map((item) => item.count);
+	const buttonHoversData = await fetchData("button-hovers");
+	const hoverLabels = buttonHoversData.map((item) => item._id);
+	const hoverCounts = buttonHoversData.map((item) => item.count);
 
 	// If the chart already exists, destroy it before creating a new one
-	if (eventTypesChart) eventTypesChart.destroy();
-	eventTypesChart = createPieChart(document.getElementById("eventTypesChart"), eventLabels, eventCounts, "Event Types");
+	if (buttonHoversChart) buttonHoversChart.destroy();
+	buttonHoversChart = createBarChart(document.getElementById("buttonHoversChart"), hoverLabels, hoverCounts, "Hover Counts");
 }
 
 // Set up the refresh button to reload the data (without reloading the page)

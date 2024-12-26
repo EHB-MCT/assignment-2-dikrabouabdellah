@@ -78,4 +78,15 @@ router.get("/aggregate/event-types", async (req, res) => {
 	}
 });
 
+// Route to get aggregated hovers
+router.get("/aggregate/button-hovers", async (req, res) => {
+	try {
+		const hovers = await Tracking.aggregate([{ $match: { eventType: "hover" } }, { $group: { _id: "$buttonName", count: { $sum: 1 } } }, { $sort: { count: -1 } }]);
+		res.json(hovers);
+	} catch (error) {
+		console.error("Error fetching button hovers:", error);
+		res.status(500).send("Internal Server Error");
+	}
+});
+
 module.exports = router;
