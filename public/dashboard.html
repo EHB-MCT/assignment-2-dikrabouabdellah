@@ -1,9 +1,11 @@
+<!--Html for the analytics dashboard-->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Analytics Dashboard</title>
+		<link rel="shortcut icon" href="./../src/assets/Images/favicon/favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" href="./../src/assets/styles/style.css" />
 		<link rel="stylesheet" href="./../src/assets/styles/dashboard.css" />
 	</head>
@@ -16,15 +18,18 @@
 		<main>
 			</section>
 			<section id="button-clicks-chart">
-				<h2>Button Clicks</h2>
+				<h2>GemRec Clicks</h2>
+				<p>How many times was GemRec clicked</p>
 				<canvas id="buttonClicksChart"></canvas>
 			</section>
-			<section id="scroll-depth-chart" style="width: 59rem; height: 40rem; margin: 0 auto; padding-bottom: 5rem;">
+			<section id="scroll-depth-chart" style="width: 64rem; height: 40rem; margin: 0 auto; padding-bottom: 5rem;">
 				<h2>Scroll Depth</h2>
+				<p>How deep do people scroll on the website in percentage</p>
 				<canvas id="scrollDepthChart"></canvas>
 			</section>
 			<section id="button-hovers-chart">
-				<h2>Button Hovers</h2>
+				<h2>GemRec Hovers</h2>
+				<p>How many times was a GemRec hovered</p>
 				<canvas id="buttonHoversChart"></canvas>
 			</section>
 		</main>
